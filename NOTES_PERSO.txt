@@ -1,0 +1,23 @@
+# references
+official site : https://www.haskell.org
+courses & exercises : http://www.cis.upenn.edu/~cis194/spring13/lectures.html
+
+# install
+sudo apt-get install -y haskell-platform haskell-stack stylish-haskell hlint ghc-mod
+stack install hindent
+
+# use example
+cd ~/Development/
+stack new simple
+mv simple HaskellTuto
+cd HaskellTuto
+stack clean --full
+stack build --test --coverage --haddock --fast --trace --profile --bench
+stack runghc app/Main.hs
+stack repl app/Main.hs --load --trace --profile --test --bench
+
+# personnal scripts
+https://github.com/ymir-0/HaskellProjectTools
+
+# IDE IntelliJ HaskForce (in default list)
+https://github.com/carymrobbins/intellij-haskforce
