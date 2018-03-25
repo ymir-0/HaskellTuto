@@ -87,11 +87,48 @@ sumPair (x,y) = x + y
 f :: Int -> Int -> Int -> Int
 f x y z = x + y + z
 ex17 = f 3 17 8
--- *****
+-- *****List
+nums, range, range2 :: [Integer]
+nums   = [1,2,3,19]
+range  = [1..100]
+range2 = [2,4..100]
+hello1 :: [Char]
+hello1 = ['h', 'e', 'l', 'l', 'o']
+hello2 :: String
+hello2 = "hello"
+helloSame = hello1 == hello2
+-- *****Constructing lists
+emptyList = []
+ex18 = 1 : []
+ex19 = 3 : (1 : [])
+ex20 = 2 : 3 : 4 : []
+ex21 = [2,3,4] == 2 : 3 : 4 : []
+-- Generate the sequence of hailstone iterations from a starting number.
+hailstoneSeq :: Integer -> [Integer]
+hailstoneSeq 1 = [1]
+hailstoneSeq n = n : hailstoneSeq (hailstone n)
+-- *****Functions on lists
+-- Compute the length of a list of Integers.
+intListLength :: [Integer] -> Integer
+intListLength []     = 0
+intListLength (_:xs) = 1 + intListLength xs
+sumEveryTwo :: [Integer] -> [Integer]
+sumEveryTwo []         = []     -- Do nothing to the empty list
+sumEveryTwo (x:[])     = [x]    -- Do nothing to lists with a single element
+sumEveryTwo (x:(y:zs)) = (x + y) : sumEveryTwo zs
+-- *****Combining functions
+-- The number of hailstone steps needed to reach 1 from a starting
+-- number.
+hailstoneLen :: Integer -> Integer
+hailstoneLen n = intListLength (hailstoneSeq n) - 1
 -- *****RUN
 --y,reallyBig
 --main = print (x,i,biggestInt,smallestInt,n,numDigits,d1,d2,b1,b2,c1,c2,c3,s)
 --main = print (ex01,ex02,ex03,ex04,ex05,ex06,ex07,ex08,ex09,ex10)
 --main = print (ex11,ex12,ex13,ex14,ex15,ex16)
 --main = print (map sumtorial [0,3], map hailstone [2,3] , map foo [(-3),0,1,36,38], map isEven [0,1,2,3])
-main = print (p,sumPair(3,5),ex17,let n=4 in f 3 (n+1) 7)
+--main = print (p,sumPair(3,5),ex17,let n=4 in f 3 (n+1) 7)
+--main = print (hello1,hello2,helloSame,nums, range, range2)
+--emptyList
+--main = print (ex18,ex19,ex20,ex21,hailstoneSeq 10)
+main = print (map intListLength (map hailstoneSeq [10,11]),sumEveryTwo (hailstoneSeq 10),hailstoneLen 10)
