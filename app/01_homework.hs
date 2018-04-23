@@ -1,3 +1,4 @@
+-- ***** Validating Credit Card Numbers *****
 -- parse a number to digits
 toDigits :: Integer -> [Integer]
 toDigits number
@@ -29,3 +30,11 @@ sumDigits (element:leftover) = sumDigits([element])+sumDigits(leftover)
  -- validate credit card
 validate :: Integer -> Bool
 validate(creditCardNumber) = (mod (sumDigits(doubleEveryOther(toDigits(creditCardNumber)))) 10)==0
+-- ***** The Towers of Hanoi *****
+type Peg = String
+type Move = (Peg, Peg)
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi 1 a b c = [(a,b)]
+hanoi n a b c = ((hanoi (n-1) a c b)++[(a,b)])++(hanoi (n-1) c b a)
+--hanoi n a b c = (hanoi (n-1) a c b)++[(a,b)]
+--hanoi n a b c = hanoi (n-1) a c b
