@@ -13,14 +13,18 @@ reverseArray :: [Integer] -> [Integer]
 reverseArray [] = []
 reverseArray (element:[]) = [element]
 reverseArray (element:leftover) = reverseArray(leftover)++[element]
--- double every 2nd number from right to left
+-- double every 2nd number from LEFT to RIGHT
+doubleEveryStd :: [Integer] -> [Integer]
+doubleEveryStd [] = []
+doubleEveryStd (element:[]) = element:[]
+doubleEveryStd (element1:element0:leftover) = element1:2*element0:doubleEveryStd(leftover)
+-- double every 2nd number from RIGHT to LEFT
 doubleEveryOther :: [Integer] -> [Integer]
-doubleEveryOther [] = []
-doubleEveryOther (element:[]) = element:[]
-doubleEveryOther (element1:element0:[]) = element1:2*element0:[]
-doubleEveryOther (element1:element0:leftover) = element1:2*element0:doubleEveryOther(reverseArray(leftover))
+doubleEveryOther (array) = reverseArray(doubleEveryStd(reverseArray(array)))
 -- sum digits
 sumDigits :: [Integer] -> Integer
 sumDigits [] = 0
 sumDigits (element:[]) = sum (toDigits element)
 sumDigits (element:leftover) = sumDigits([element])+sumDigits(leftover)
+ -- validate credit card
+--validate :: Integer -> Bool
