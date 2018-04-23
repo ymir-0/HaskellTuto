@@ -34,33 +34,17 @@ validate(creditCardNumber) = (mod (sumDigits(doubleEveryOther(toDigits(creditCar
 type Peg = String
 type Move = (Peg, Peg)
 hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
-hanoi 1 a b c = [(a,b)]
-hanoi n a b c = ((hanoi (n-1) a c b)++[(a,b)])++(hanoi (n-1) c b a)
-
-reversePegs :: [Peg] -> [Peg]
-reversePegs [] = []
-reversePegs (element:[]) = [element]
-reversePegs (element:leftover) = reversePegs(leftover)++[element]
+hanoi 1 a _ c = [(a,c)]
+hanoi n a b c = (hanoi (n-1) a c b)++[(a,c)]++(hanoi (n-1) b a c)
 
 getFirst :: [Peg] -> Peg
 getFirst (element:_) = element
-
-getLast :: [Peg] -> Peg
-getLast (pegs) = getFirst(reversePegs(pegs))
 
 removeFirst :: [Peg] -> [Peg]
 removeFirst (peg:[]) = [peg]
 removeFirst (peg:leftover) = leftover 
 
-removeLast :: [Peg] -> [Peg]
-removeLast pegs = reversePegs(removeFirst(reversePegs(pegs)))
-
-removeFirstLast :: [Peg] -> [Peg]
-removeFirstLast pegs = removeFirst(removeLast(pegs))
-
 hanoiExt :: Integer -> Peg -> [Peg] -> Peg -> [Move]
 hanoiExt 1 peg0 _ peg1 = [(peg0,peg1)]
 hanoiExt n peg0 [] peg1 = [(peg0,peg1)]
-hanoiExt n peg0 pegs peg1 = ((hanoiExt (n-1) (getFirst(pegs)) (removeFirstLast(pegs)) (getLast(pegs)))++[(peg0,peg1)])++ ( hanoiExt (n-1) (getFirst(pegs)) (peg0:removeFirst(pegs)) peg1 )
---hanoiExt n peg0 pegs peg1 = (hanoiExt (n-1) (getFirst(pegs)) (removeFirstLast(pegs)) (getLast(pegs)))++[(peg0,peg1)]
---hanoiExt n peg0 pegs peg1 = hanoiExt (n-1) (getFirst(pegs)) (removeFirstLast(pegs)) (getLast(pegs))
+hanoiExt n peg0 pegs peg1 = (hanoiExt (n-1) peg0  (peg1:removeFirst(pegs)) (getFirst(pegs))) ++ [(peg0,peg1)] ++ (hanoiExt (n-1) (getFirst(pegs)) (peg0:(removeFirst(pegs))) peg1)
