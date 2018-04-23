@@ -1,27 +1,27 @@
-	Mon Apr 23 10:33 2018 Time and Allocation Profiling Report  (Final)
+	Mon Apr 23 11:23 2018 Time and Allocation Profiling Report  (Final)
 
 	   simple-test.exe +RTS -N -xc -p -RTS
 
 	total time  =        0.00 secs   (1 ticks @ 1000 us, 1 processor)
-	total alloc =      50,216 bytes  (excludes profiling overheads)
+	total alloc =      49,616 bytes  (excludes profiling overheads)
 
 COST CENTRE MODULE           SRC                  %time %alloc
 
-CAF         GHC.IO.Handle.FD <entire-module>      100.0   69.2
-MAIN        MAIN             <built-in>             0.0    6.9
-main        Main             test\Spec.hs:2:1-48    0.0   22.7
+MAIN        MAIN             <built-in>           100.0    5.7
+main        Main             test\Spec.hs:2:1-48    0.0   23.0
+CAF         GHC.IO.Handle.FD <entire-module>        0.0   70.1
 
 
                                                                              individual      inherited
 COST CENTRE  MODULE                   SRC                 no.     entries  %time %alloc   %time %alloc
 
-MAIN         MAIN                     <built-in>           63          0    0.0    6.9   100.0  100.0
+MAIN         MAIN                     <built-in>           63          0  100.0    5.7   100.0  100.0
  CAF         GHC.IO.Encoding.CodePage <entire-module>     111          0    0.0    0.4     0.0    0.4
  CAF         GHC.IO.Handle.Text       <entire-module>     108          0    0.0    0.2     0.0    0.2
  CAF         GHC.IO.Encoding          <entire-module>     101          0    0.0    0.1     0.0    0.1
- CAF         GHC.IO.Handle.FD         <entire-module>      96          0  100.0   69.2   100.0   69.2
+ CAF         GHC.IO.Handle.FD         <entire-module>      96          0    0.0   70.1     0.0   70.1
  CAF         GHC.Conc.Windows         <entire-module>      94          0    0.0    0.4     0.0    0.4
  CAF:main    :Main                    test\Spec.hs:2:1-4   71          0    0.0    0.1     0.0    0.1
- CAF:main    Main                     test\Spec.hs:2:1-4   70          0    0.0    0.0     0.0    4.4
-  main       Main                     test\Spec.hs:2:1-48 126          1    0.0    4.4     0.0    4.4
- main        Main                     test\Spec.hs:2:1-48 127          0    0.0   18.3     0.0   18.3
+ CAF:main    Main                     test\Spec.hs:2:1-4   70          0    0.0    0.0     0.0    4.5
+  main       Main                     test\Spec.hs:2:1-48 126          1    0.0    4.5     0.0    4.5
+ main        Main                     test\Spec.hs:2:1-48 127          0    0.0   18.5     0.0   18.5

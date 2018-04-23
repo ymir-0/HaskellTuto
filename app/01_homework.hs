@@ -19,3 +19,8 @@ doubleEveryOther [] = []
 doubleEveryOther (element:[]) = element:[]
 doubleEveryOther (element1:element0:[]) = element1:2*element0:[]
 doubleEveryOther (element1:element0:leftover) = element1:2*element0:doubleEveryOther(reverseArray(leftover))
+-- sum digits
+sumDigits :: [Integer] -> Integer
+sumDigits [] = 0
+sumDigits (element:[]) = sum (toDigits element)
+sumDigits (element:leftover) = sumDigits([element])+sumDigits(leftover)
