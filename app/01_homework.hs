@@ -46,6 +46,7 @@ tempStorage n (peg:temp0:tempLeftover) = (peg,temp0):(tempStorage (n-1) (peg:tem
 hanoiExt :: Int -> [Peg] -> [Move]
 hanoiExt 1 (a:b:_) = [(a,b)]
 hanoiExt n (a:b:[]) = [(a,b)]
-hanoiExt n (a:b:temp) = (tempStorage (length(temp)) (a:temp))++(hanoiExt (n-length(temp)) (a:[b]))
+hanoiExt n (a:b:temp) = tempStorage (length(temp)) (a:temp)
+--hanoiExt n (a:b:temp) = (tempStorage (length(temp)) (a:temp))++(hanoiExt (n-length(temp)) (a:[b]))
 --hanoiExt n (a:b:temp) = hanoiExt (n-length(temp)) (a:[b])
 --hanoiExt n (a:b:temp) = tempStorage (length(temp)) (a:temp)
