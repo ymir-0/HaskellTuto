@@ -27,4 +27,5 @@ sumDigits [] = 0
 sumDigits (element:[]) = sum (toDigits element)
 sumDigits (element:leftover) = sumDigits([element])+sumDigits(leftover)
  -- validate credit card
---validate :: Integer -> Bool
+validate :: Integer -> Bool
+validate(creditCardNumber) = (mod (sumDigits(doubleEveryOther(toDigits(creditCardNumber)))) 10)==0
