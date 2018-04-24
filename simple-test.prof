@@ -1,31 +1,31 @@
-	Mon Apr 23 21:17 2018 Time and Allocation Profiling Report  (Final)
+	Tue Apr 24 11:04 2018 Time and Allocation Profiling Report  (Final)
 
 	   simple-test +RTS -N -xc -p -RTS
 
-	total time  =        0.00 secs   (1 ticks @ 1000 us, 1 processor)
-	total alloc =      72,776 bytes  (excludes profiling overheads)
+	total time  =        0.00 secs   (0 ticks @ 1000 us, 1 processor)
+	total alloc =      73,000 bytes  (excludes profiling overheads)
 
 COST CENTRE MODULE           SRC                  %time %alloc
 
-CAF         GHC.IO.Handle.FD <entire-module>      100.0   47.7
-MAIN        MAIN             <built-in>             0.0   29.7
+MAIN        MAIN             <built-in>             0.0   30.0
 CAF         GHC.Event.Thread <entire-module>        0.0    1.7
+CAF         GHC.IO.Handle.FD <entire-module>        0.0   47.5
 CAF         GHC.IO.Encoding  <entire-module>        0.0    3.8
-main        Main             test/Spec.hs:2:1-48    0.0   15.7
+main        Main             test/Spec.hs:2:1-48    0.0   15.6
 
 
                                                                           individual      inherited
 COST CENTRE  MODULE                SRC                 no.     entries  %time %alloc   %time %alloc
 
-MAIN         MAIN                  <built-in>          136          0    0.0   29.7   100.0  100.0
+MAIN         MAIN                  <built-in>          136          0    0.0   30.0     0.0  100.0
  CAF         GHC.Conc.Signal       <entire-module>     244          0    0.0    0.9     0.0    0.9
  CAF         GHC.IO.Encoding       <entire-module>     233          0    0.0    3.8     0.0    3.8
  CAF         GHC.IO.Encoding.Iconv <entire-module>     231          0    0.0    0.3     0.0    0.3
- CAF         GHC.IO.Handle.FD      <entire-module>     223          0  100.0   47.7   100.0   47.7
+ CAF         GHC.IO.Handle.FD      <entire-module>     223          0    0.0   47.5     0.0   47.5
  CAF         GHC.IO.Handle.Text    <entire-module>     221          0    0.0    0.1     0.0    0.1
  CAF         GHC.Event.Thread      <entire-module>     185          0    0.0    1.7     0.0    1.7
  CAF         GHC.Event.Poll        <entire-module>     152          0    0.0    0.1     0.0    0.1
  CAF:main    :Main                 test/Spec.hs:2:1-4  271          0    0.0    0.0     0.0    0.0
- CAF:main    Main                  test/Spec.hs:2:1-4  270          0    0.0    0.0     0.0    3.1
-  main       Main                  test/Spec.hs:2:1-48 272          1    0.0    3.1     0.0    3.1
+ CAF:main    Main                  test/Spec.hs:2:1-4  270          0    0.0    0.0     0.0    3.0
+  main       Main                  test/Spec.hs:2:1-48 272          1    0.0    3.0     0.0    3.0
  main        Main                  test/Spec.hs:2:1-48 273          0    0.0   12.6     0.0   12.6

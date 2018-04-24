@@ -37,14 +37,40 @@ hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
 hanoi 1 a _ c = [(a,c)]
 hanoi n a b c = (hanoi (n-1) a c b)++[(a,c)]++(hanoi (n-1) b a c)
 
+pegsLength :: [Peg] -> Integer
+pegsLength [] = 0
+pegsLength (_:leftover) = 1 + (pegsLength leftover)
+
+reversePegs :: [Peg] -> [Peg]
+reversePegs [] = []
+reversePegs (peg:[]) = [peg]
+reversePegs (peg:leftover) = reversePegs(leftover)++[peg]
+
 getFirst :: [Peg] -> Peg
-getFirst (element:_) = element
+getFirst (peg:_) = peg
+
+getLast :: [Peg] -> Peg
+getLast pegs = getFirst(reversePegs(pegs))
 
 removeFirst :: [Peg] -> [Peg]
-removeFirst (peg:[]) = [peg]
-removeFirst (peg:leftover) = leftover 
+removeFirst [] = []
+removeFirst (_:leftover) = leftover
+
+removeLast :: [Peg] -> [Peg]
+removeLast (pegs) = reversePegs(removeFirst(reversePegs(pegs)))
+
+dispatch :: Integer -> Peg -> [Peg] -> [Move]
+dispatch 0 _ __ = []
+dispatch n _ [] = []
+dispatch n peg pegs = [(peg,getFirst(pegs))]++(dispatch (n-1) peg (removeFirst(pegs)))
+
+regroup :: [Peg] -> Peg -> [Move]
+regroup [] _ = []
+regroup pegs peg = [((getFirst(pegs)),peg)]++(regroup (removeFirst(pegs)) peg)
 
 hanoiExt :: Integer -> Peg -> [Peg] -> Peg -> [Move]
-hanoiExt 1 peg0 _ peg1 = [(peg0,peg1)]
-hanoiExt n peg0 [] peg1 = [(peg0,peg1)]
-hanoiExt n peg0 pegs peg1 = (hanoiExt (n-1) peg0  (peg1:removeFirst(pegs)) (getFirst(pegs))) ++ [(peg0,peg1)] ++ (hanoiExt (n-1) (getFirst(pegs)) (peg0:(removeFirst(pegs))) peg1)
+hanoiExt n peg0 pegs peg1
+ | n <= 0 = []
+ | n == 1 = [(peg0,peg1)]
+ | pegs == [] = [(peg0,peg1)]
+ | otherwise = (hanoiExt (n-pegsLength(pegs)) peg0 (removeFirst(pegs)) (getFirst(pegs)))++(dispatch (pegsLength(pegs)) peg0 ((removeFirst(pegs))++[peg1]))++(regroup (removeFirst(pegs)) peg1)++(hanoiExt (n-pegsLength(pegs)) (getFirst(pegs)) (peg0:(removeFirst(pegs))) peg1)
